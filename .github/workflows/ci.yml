@@ -8,6 +8,7 @@ on:
       - 'main'
       - '*-maintenance'
       - '*-dev'
+      - 'experimental-github-actions'
   pull_request:
     branches:
       - '*'
@@ -26,6 +27,11 @@ jobs:
       fail-fast: false
       matrix:
         container:
+          - version: "Ruby 1.8.7"
+            tag: rspec/ci:1.8.7
+            options: "--add-host rubygems.org:151.101.0.70 --add-host api.rubygems.org:151.101.0.70"
+          - version: "Ruby 2.0.0"
+            tag: rspec/ci:2.0.0
     env:
       LEGACY_CI: true
       JRUBY_OPTS: ${{ matrix.container.jruby_opts || '--dev' }}
